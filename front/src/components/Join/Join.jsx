@@ -2,9 +2,14 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import "./Join.css"
 
-const Join = () => {
+const Join = ({ redirect }) => {
     const [name, setName] = useState("")
     const [room, setRoom] = useState("")
+
+    const handleRedirect = (event) => {
+        // event.preventDefault()
+        redirect(name, room)
+    }
 
     return (
         <div className={"joinOuterContainer"}>
@@ -26,8 +31,8 @@ const Join = () => {
                     />
                 </div>
                 <Link
-                    onClick={(event) => (!name || !room) && event.preventDefault()}
-                    to={`/chat?name=${name}&room=${room}`}>
+                    onClick={(event) => handleRedirect(event)}
+                    to={`/chat`}>
                     <button
                         className={"button mt-20 "}
                         type={"submit"}>

@@ -1,14 +1,21 @@
 import React from "react"
 import { BrowserRouter as Router, Route } from "react-router-dom"
-import Join from "./components/Join/Join"
-import Chat from "./components/Chat/Chat"
+import JoinContainer from "./containers/JoinContainer"
+import ChatContainer from "./containers/ChatContainer"
+import { createStore } from "redux"
+import redirectReducer from "./reducers/index"
+import { Provider } from "react-redux"
+
+const store = createStore(redirectReducer)
 
 const App = () => {
     return (
-        <Router>
-            <Route path="/" exact component={Join} />
-            <Route path="/chat" exact component={Chat} />
-        </Router>
+        <Provider store={store}>
+            <Router>
+                <Route path="/" exact component={JoinContainer} />
+                <Route path="/chat" exact component={ChatContainer} />
+            </Router>
+        </Provider>
     )
 }
 
